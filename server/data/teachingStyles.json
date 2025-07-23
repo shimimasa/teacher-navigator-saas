@@ -1,0 +1,292 @@
+{
+  "styles": [
+    {
+      "name": "structured-facilitator",
+      "displayName": "構造化ファシリテーター型",
+      "description": "明確な枠組みの中で、生徒の主体的な学びを促進する教育スタイル。計画的でありながら、生徒の発言や参加を重視します。",
+      "personalityTypes": ["ESTJ", "ENTJ", "ENFJ", "ESFJ"],
+      "characteristics": [
+        "明確な学習目標と評価基準を設定",
+        "段階的な学習プロセスを設計",
+        "活発なクラスディスカッションを促進",
+        "構造化されたグループワークを実施"
+      ],
+      "strengths": [
+        "学習の方向性が明確で生徒が安心して参加できる",
+        "計画的な進行で学習効果が高い",
+        "生徒の主体性と規律のバランスが取れている"
+      ],
+      "methods": [
+        {
+          "name": "段階的ディスカッション法",
+          "description": "個人思考→ペア共有→グループ討議→全体発表の流れで進行",
+          "examples": ["Think-Pair-Share", "ジグソー法", "ワールドカフェ"]
+        },
+        {
+          "name": "ルーブリック評価",
+          "description": "明確な評価基準を事前に提示し、生徒の自己評価も組み込む",
+          "examples": ["パフォーマンス評価表", "相互評価シート", "振り返りポートフォリオ"]
+        }
+      ],
+      "subjects": ["国語", "社会", "総合的な学習", "道徳"],
+      "gradeLevel": {
+        "elementary": true,
+        "juniorHigh": true,
+        "highSchool": true
+      },
+      "tags": ["アクティブラーニング", "構造化", "ファシリテーション", "協働学習"]
+    },
+    {
+      "name": "creative-explorer",
+      "displayName": "創造的探求者型",
+      "description": "生徒の創造性と好奇心を最大限に引き出す教育スタイル。柔軟な発想と実験的なアプローチを重視します。",
+      "personalityTypes": ["ENFP", "ENTP", "INFP", "INTP"],
+      "characteristics": [
+        "オープンエンドな課題設定",
+        "試行錯誤を奨励する環境づくり",
+        "多様な表現方法を認める",
+        "教科横断的なアプローチ"
+      ],
+      "strengths": [
+        "生徒の創造性が最大限に発揮される",
+        "学習への内発的動機付けが高まる",
+        "批判的思考力と問題解決能力が育つ"
+      ],
+      "methods": [
+        {
+          "name": "プロジェクトベース学習",
+          "description": "実世界の問題に取り組む長期プロジェクト",
+          "examples": ["地域課題解決プロジェクト", "クリエイティブ作品制作", "発明・イノベーション課題"]
+        },
+        {
+          "name": "デザイン思考ワークショップ",
+          "description": "共感→定義→発想→試作→検証のプロセス",
+          "examples": ["学校改善提案", "新商品開発シミュレーション", "社会問題解決デザイン"]
+        }
+      ],
+      "subjects": ["美術", "技術", "理科", "総合的な学習"],
+      "gradeLevel": {
+        "elementary": true,
+        "juniorHigh": true,
+        "highSchool": true
+      },
+      "tags": ["創造性", "探究学習", "プロジェクト型", "イノベーション"]
+    },
+    {
+      "name": "systematic-instructor",
+      "displayName": "体系的指導者型",
+      "description": "知識やスキルを体系的に整理し、段階的に教授する伝統的かつ効果的な教育スタイル。",
+      "personalityTypes": ["ISTJ", "ISFJ", "INTJ", "INFJ"],
+      "characteristics": [
+        "体系的なカリキュラム設計",
+        "基礎から応用への段階的指導",
+        "反復練習と定着の重視",
+        "明確な到達目標の設定"
+      ],
+      "strengths": [
+        "基礎学力が確実に身につく",
+        "学習の積み重ねが明確",
+        "全生徒が一定水準に到達できる"
+      ],
+      "methods": [
+        {
+          "name": "スモールステップ法",
+          "description": "複雑な内容を小さな段階に分けて指導",
+          "examples": ["計算の段階的指導", "文法の積み上げ学習", "実験手順の細分化"]
+        },
+        {
+          "name": "形成的評価",
+          "description": "学習過程での継続的な評価とフィードバック",
+          "examples": ["小テスト", "練習問題", "確認プリント"]
+        }
+      ],
+      "subjects": ["数学", "理科", "英語", "国語"],
+      "gradeLevel": {
+        "elementary": true,
+        "juniorHigh": true,
+        "highSchool": true
+      },
+      "tags": ["体系的", "段階的指導", "基礎重視", "積み上げ型"]
+    },
+    {
+      "name": "empathetic-mentor",
+      "displayName": "共感的メンター型",
+      "description": "生徒一人ひとりの感情や状況に寄り添い、個別のニーズに応じた支援を提供する教育スタイル。",
+      "personalityTypes": ["ISFJ", "INFJ", "ISFP", "INFP"],
+      "characteristics": [
+        "個別の学習ニーズへの対応",
+        "感情的なサポートの提供",
+        "安心できる学習環境の構築",
+        "生徒との信頼関係を重視"
+      ],
+      "strengths": [
+        "生徒の自己肯定感が向上",
+        "学習への不安が軽減される",
+        "個々の可能性が最大限に引き出される"
+      ],
+      "methods": [
+        {
+          "name": "個別化指導",
+          "description": "生徒の特性に応じた教材や方法の選択",
+          "examples": ["学習スタイル診断", "個別学習計画", "選択課題"]
+        },
+        {
+          "name": "振り返りジャーナル",
+          "description": "学習と感情の両面から振り返る日誌",
+          "examples": ["学習日記", "成長記録", "ポートフォリオ"]
+        }
+      ],
+      "subjects": ["道徳", "特別活動", "生活", "保健"],
+      "gradeLevel": {
+        "elementary": true,
+        "juniorHigh": true,
+        "highSchool": false
+      },
+      "tags": ["個別指導", "共感", "メンタリング", "情緒的支援"]
+    },
+    {
+      "name": "dynamic-performer",
+      "displayName": "ダイナミック実演型",
+      "description": "エネルギッシュで魅力的なプレゼンテーションを通じて、生徒の興味と参加を引き出す教育スタイル。",
+      "personalityTypes": ["ESTP", "ESFP", "ENTP", "ENFP"],
+      "characteristics": [
+        "動的で魅力的な授業展開",
+        "実演や実験の積極的活用",
+        "ユーモアとエンターテインメント性",
+        "即興的な対応力"
+      ],
+      "strengths": [
+        "生徒の注意を引きつけ続ける",
+        "学習内容が記憶に残りやすい",
+        "授業への参加意欲が高まる"
+      ],
+      "methods": [
+        {
+          "name": "実演型授業",
+          "description": "教師が実際にやって見せる指導法",
+          "examples": ["科学実験ショー", "歴史劇", "スポーツ実技指導"]
+        },
+        {
+          "name": "ゲーミフィケーション",
+          "description": "ゲーム要素を取り入れた学習活動",
+          "examples": ["クイズ大会", "ロールプレイ", "競争型学習ゲーム"]
+        }
+      ],
+      "subjects": ["体育", "理科", "音楽", "英会話"],
+      "gradeLevel": {
+        "elementary": true,
+        "juniorHigh": true,
+        "highSchool": false
+      },
+      "tags": ["パフォーマンス", "エンターテインメント", "実演", "アクティブ"]
+    },
+    {
+      "name": "analytical-coach",
+      "displayName": "分析的コーチ型",
+      "description": "データと論理に基づいて生徒の学習を分析し、的確なフィードバックと改善策を提供する教育スタイル。",
+      "personalityTypes": ["INTJ", "INTP", "ENTJ", "ENTP"],
+      "characteristics": [
+        "学習データの収集と分析",
+        "論理的な問題解決アプローチ",
+        "批判的思考の育成",
+        "エビデンスベースの指導"
+      ],
+      "strengths": [
+        "学習の課題が明確に特定される",
+        "論理的思考力が育成される",
+        "効率的な学習方法が身につく"
+      ],
+      "methods": [
+        {
+          "name": "データドリブン指導",
+          "description": "学習データに基づく個別最適化",
+          "examples": ["学習分析ダッシュボード", "進捗トラッキング", "パフォーマンス分析"]
+        },
+        {
+          "name": "ソクラテス式問答法",
+          "description": "質問を通じて深い思考を促す",
+          "examples": ["批判的思考演習", "論理パズル", "ケーススタディ"]
+        }
+      ],
+      "subjects": ["数学", "物理", "情報", "論理国語"],
+      "gradeLevel": {
+        "elementary": false,
+        "juniorHigh": true,
+        "highSchool": true
+      },
+      "tags": ["分析", "データ活用", "論理的思考", "コーチング"]
+    },
+    {
+      "name": "collaborative-organizer",
+      "displayName": "協働的組織者型",
+      "description": "生徒同士の協力を促進し、組織的な学習コミュニティを構築する教育スタイル。",
+      "personalityTypes": ["ESFJ", "ENFJ", "ESTJ", "ENTJ"],
+      "characteristics": [
+        "協働学習の組織化",
+        "役割分担の明確化",
+        "チームビルディング活動",
+        "相互支援の仕組みづくり"
+      ],
+      "strengths": [
+        "社会性とコミュニケーション能力が育つ",
+        "多様な視点から学習できる",
+        "リーダーシップが育成される"
+      ],
+      "methods": [
+        {
+          "name": "協働プロジェクト",
+          "description": "チームで取り組む課題解決型学習",
+          "examples": ["グループ研究", "共同制作", "ピアティーチング"]
+        },
+        {
+          "name": "学習コミュニティ構築",
+          "description": "クラス全体を学び合うコミュニティに",
+          "examples": ["学習サークル", "スタディグループ", "メンター制度"]
+        }
+      ],
+      "subjects": ["総合的な学習", "特別活動", "社会", "家庭科"],
+      "gradeLevel": {
+        "elementary": true,
+        "juniorHigh": true,
+        "highSchool": true
+      },
+      "tags": ["協働学習", "チームワーク", "組織化", "コミュニティ"]
+    },
+    {
+      "name": "practical-demonstrator",
+      "displayName": "実践的実証型",
+      "description": "実際の体験や実習を通じて、実用的なスキルと知識を身につけさせる教育スタイル。",
+      "personalityTypes": ["ISTP", "ESTP", "ISFP", "ESFP"],
+      "characteristics": [
+        "ハンズオン学習の重視",
+        "実生活との関連付け",
+        "体験を通じた理解",
+        "実用的スキルの習得"
+      ],
+      "strengths": [
+        "学習内容が実生活で活用できる",
+        "体験を通じて深い理解が得られる",
+        "実践的なスキルが身につく"
+      ],
+      "methods": [
+        {
+          "name": "実習型授業",
+          "description": "実際に手を動かして学ぶ活動",
+          "examples": ["実験", "工作", "調理実習", "フィールドワーク"]
+        },
+        {
+          "name": "シミュレーション学習",
+          "description": "実際の状況を模擬的に体験",
+          "examples": ["ビジネスシミュレーション", "災害訓練", "職業体験"]
+        }
+      ],
+      "subjects": ["技術・家庭", "理科", "体育", "美術"],
+      "gradeLevel": {
+        "elementary": true,
+        "juniorHigh": true,
+        "highSchool": true
+      },
+      "tags": ["実践", "体験学習", "ハンズオン", "スキル習得"]
+    }
+  ]
+}

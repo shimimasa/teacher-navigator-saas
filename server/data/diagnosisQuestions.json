@@ -1,0 +1,255 @@
+{
+  "questions": [
+    {
+      "id": "E1",
+      "category": "extroversion",
+      "text": "授業中、生徒との対話やディスカッションを積極的に取り入れることを好みますか？",
+      "description": "外向性を測定：対話重視の傾向"
+    },
+    {
+      "id": "E2",
+      "category": "extroversion",
+      "text": "教員室では、同僚との会話や情報交換を楽しんでいますか？",
+      "description": "外向性を測定：社交性"
+    },
+    {
+      "id": "E3",
+      "category": "extroversion",
+      "text": "大人数のクラスで教えることにエネルギーを感じますか？",
+      "description": "外向性を測定：大人数への適応"
+    },
+    {
+      "id": "E4",
+      "category": "extroversion",
+      "text": "授業準備は他の教員と協力して行うことを好みますか？",
+      "description": "外向性を測定：協働性"
+    },
+    {
+      "id": "E5",
+      "category": "extroversion",
+      "text": "学校行事や課外活動の企画・運営に積極的に参加しますか？",
+      "description": "外向性を測定：活動への参加"
+    },
+    {
+      "id": "E6",
+      "category": "extroversion",
+      "text": "生徒の前で即興的に話すことに抵抗がありませんか？",
+      "description": "外向性を測定：即興性"
+    },
+    {
+      "id": "E7",
+      "category": "extroversion",
+      "text": "保護者会や面談で、積極的に発言することが多いですか？",
+      "description": "外向性を測定：対外的発信"
+    },
+    {
+      "id": "E8",
+      "category": "extroversion",
+      "text": "新しいアイデアは、他者との会話から生まれることが多いですか？",
+      "description": "外向性を測定：外的刺激からの創造"
+    },
+    {
+      "id": "E9",
+      "category": "extroversion",
+      "text": "グループワークやペア学習を頻繁に取り入れていますか？",
+      "description": "外向性を測定：協働学習の重視"
+    },
+    {
+      "id": "E10",
+      "category": "extroversion",
+      "text": "職員会議では、自分の意見を積極的に発言しますか？",
+      "description": "外向性を測定：会議での発言"
+    },
+    {
+      "id": "S1",
+      "category": "sensing",
+      "text": "授業では具体的な例や実物を使って説明することを重視しますか？",
+      "description": "感覚型を測定：具体性重視"
+    },
+    {
+      "id": "S2",
+      "category": "sensing",
+      "text": "カリキュラムは、実践的で即座に応用できる内容を優先しますか？",
+      "description": "感覚型を測定：実用性"
+    },
+    {
+      "id": "S3",
+      "category": "sensing",
+      "text": "生徒の評価では、具体的な行動や成果を重視しますか？",
+      "description": "感覚型を測定：観察可能な成果"
+    },
+    {
+      "id": "S4",
+      "category": "sensing",
+      "text": "授業計画は、詳細で段階的な手順を含むものを好みますか？",
+      "description": "感覚型を測定：詳細志向"
+    },
+    {
+      "id": "S5",
+      "category": "sensing",
+      "text": "教材は、実績のある定番のものを使用することが多いですか？",
+      "description": "感覚型を測定：伝統重視"
+    },
+    {
+      "id": "S6",
+      "category": "sensing",
+      "text": "生徒の理解度は、小テストなど具体的な方法で確認しますか？",
+      "description": "感覚型を測定：測定可能性"
+    },
+    {
+      "id": "S7",
+      "category": "sensing",
+      "text": "授業では、基礎から応用へと順序立てて教えることを重視しますか？",
+      "description": "感覚型を測定：段階的学習"
+    },
+    {
+      "id": "S8",
+      "category": "sensing",
+      "text": "教室環境は、整理整頓され機能的であることを重視しますか？",
+      "description": "感覚型を測定：物理的環境"
+    },
+    {
+      "id": "S9",
+      "category": "sensing",
+      "text": "生徒への指示は、具体的で明確なものを心がけていますか？",
+      "description": "感覚型を測定：明確な指示"
+    },
+    {
+      "id": "S10",
+      "category": "sensing",
+      "text": "教育の成果は、テストの点数など数値で測れるものを重視しますか？",
+      "description": "感覚型を測定：定量的評価"
+    },
+    {
+      "id": "T1",
+      "category": "thinking",
+      "text": "生徒への評価やフィードバックは、客観的な基準に基づいて行いますか？",
+      "description": "思考型を測定：客観性"
+    },
+    {
+      "id": "T2",
+      "category": "thinking",
+      "text": "クラスのルールは、公平性と一貫性を最優先に設定しますか？",
+      "description": "思考型を測定：公平性"
+    },
+    {
+      "id": "T3",
+      "category": "thinking",
+      "text": "教育方針の決定では、論理的な根拠を重視しますか？",
+      "description": "思考型を測定：論理性"
+    },
+    {
+      "id": "T4",
+      "category": "thinking",
+      "text": "生徒の問題行動には、感情よりも規則に基づいて対処しますか？",
+      "description": "思考型を測定：規則重視"
+    },
+    {
+      "id": "T5",
+      "category": "thinking",
+      "text": "授業内容は、体系的で論理的な構成を重視しますか？",
+      "description": "思考型を測定：体系性"
+    },
+    {
+      "id": "T6",
+      "category": "thinking",
+      "text": "生徒との関係では、適切な距離感を保つことを重視しますか？",
+      "description": "思考型を測定：専門的距離"
+    },
+    {
+      "id": "T7",
+      "category": "thinking",
+      "text": "教育効果の検証では、データや統計を活用しますか？",
+      "description": "思考型を測定：データ重視"
+    },
+    {
+      "id": "T8",
+      "category": "thinking",
+      "text": "批判的思考力の育成を、教育目標の中心に据えていますか？",
+      "description": "思考型を測定：批判的思考"
+    },
+    {
+      "id": "T9",
+      "category": "thinking",
+      "text": "同僚との議論では、感情よりも事実を重視しますか？",
+      "description": "思考型を測定：事実重視"
+    },
+    {
+      "id": "T10",
+      "category": "thinking",
+      "text": "教育方法の改善では、効率性と成果を最優先に考えますか？",
+      "description": "思考型を測定：効率性"
+    },
+    {
+      "id": "J1",
+      "category": "judging",
+      "text": "学期の初めに、詳細な授業計画を立てて実行しますか？",
+      "description": "判断型を測定：計画性"
+    },
+    {
+      "id": "J2",
+      "category": "judging",
+      "text": "授業の時間配分は、事前に決めた通りに進めることを重視しますか？",
+      "description": "判断型を測定：時間管理"
+    },
+    {
+      "id": "J3",
+      "category": "judging",
+      "text": "課題の提出期限は、厳格に守らせることを重視しますか？",
+      "description": "判断型を測定：締切厳守"
+    },
+    {
+      "id": "J4",
+      "category": "judging",
+      "text": "教室のルーティンや手順を確立することを重視しますか？",
+      "description": "判断型を測定：構造化"
+    },
+    {
+      "id": "J5",
+      "category": "judging",
+      "text": "成績評価の基準は、学期の初めに明確に設定しますか？",
+      "description": "判断型を測定：明確な基準"
+    },
+    {
+      "id": "J6",
+      "category": "judging",
+      "text": "予定外の出来事には、ストレスを感じることが多いですか？",
+      "description": "判断型を測定：予測可能性選好"
+    },
+    {
+      "id": "J7",
+      "category": "judging",
+      "text": "生徒の学習進度は、定期的にチェックし記録しますか？",
+      "description": "判断型を測定：進捗管理"
+    },
+    {
+      "id": "J8",
+      "category": "judging",
+      "text": "教材や資料は、体系的に整理して保管していますか？",
+      "description": "判断型を測定：組織化"
+    },
+    {
+      "id": "J9",
+      "category": "judging",
+      "text": "一日の授業が終わったら、翌日の準備を完了させますか？",
+      "description": "判断型を測定：事前準備"
+    },
+    {
+      "id": "J10",
+      "category": "judging",
+      "text": "教育目標は、具体的で測定可能な形で設定しますか？",
+      "description": "判断型を測定：目標の明確化"
+    }
+  ],
+  "scoring": {
+    "interpretation": {
+      "1": "全く当てはまらない",
+      "2": "あまり当てはまらない",
+      "3": "どちらとも言えない",
+      "4": "やや当てはまる",
+      "5": "非常に当てはまる"
+    },
+    "threshold": 60,
+    "description": "各カテゴリーで60%以上のスコアを獲得した場合、その特性が優位と判定されます"
+  }
+}
