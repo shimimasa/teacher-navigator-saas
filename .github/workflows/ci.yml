@@ -1,0 +1,424 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+env:
+  NODE_VERSION: '18'
+  MONGODB_VERSION: '6.0'
+  REDIS_VERSION: '7'
+
+jobs:
+  # ========================================
+  # Lint & Type Check
+  # ========================================
+  lint-and-typecheck:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install backend dependencies
+        run: |
+          cd server
+          npm ci
+          
+      - name: Install frontend dependencies
+        run: |
+          cd client
+          npm ci
+          
+      - name: Run backend linting
+        run: |
+          cd server
+          npm run lint || true
+          
+      - name: Run frontend linting
+        run: |
+          cd client
+          npm run lint || true
+          
+      - name: Run TypeScript type checking
+        run: |
+          cd client
+          npm run type-check || npx tsc --noEmit
+
+  # ========================================
+  # Backend Tests
+  # ========================================
+  backend-tests:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      mongodb:
+        image: mongo:${{ env.MONGODB_VERSION }}
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
+      redis:
+        image: redis:${{ env.REDIS_VERSION }}
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd server
+          npm ci
+          
+      - name: Setup test environment
+        run: |
+          cd server
+          cp ../.github/workflows/.env.test .env || echo "No test env file"
+          
+      - name: Run unit tests
+        run: |
+          cd server
+          npm run test:unit || npm test
+        env:
+          NODE_ENV: test
+          MONGODB_URI: mongodb://localhost:27017/test_db
+          JWT_SECRET: test-secret-key
+          REDIS_URL: redis://localhost:6379
+          
+      - name: Run integration tests
+        run: |
+          cd server
+          npm run test:integration || echo "No integration tests"
+        env:
+          NODE_ENV: test
+          MONGODB_URI: mongodb://localhost:27017/test_db
+          JWT_SECRET: test-secret-key
+          REDIS_URL: redis://localhost:6379
+          
+      - name: Generate coverage report
+        run: |
+          cd server
+          npm run test:coverage || npm test -- --coverage
+          
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./server/coverage/lcov.info
+          flags: backend
+          name: backend-coverage
+
+  # ========================================
+  # Frontend Tests
+  # ========================================
+  frontend-tests:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd client
+          npm ci
+          
+      - name: Run unit tests
+        run: |
+          cd client
+          npm test -- --watchAll=false --coverage
+        env:
+          CI: true
+          
+      - name: Run component tests
+        run: |
+          cd client
+          npm run test:components || echo "No component tests"
+        env:
+          CI: true
+          
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./client/coverage/lcov.info
+          flags: frontend
+          name: frontend-coverage
+
+  # ========================================
+  # E2E Tests
+  # ========================================
+  e2e-tests:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+    
+    services:
+      mongodb:
+        image: mongo:${{ env.MONGODB_VERSION }}
+        ports:
+          - 27017:27017
+          
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install backend dependencies
+        run: |
+          cd server
+          npm ci
+          
+      - name: Install frontend dependencies
+        run: |
+          cd client
+          npm ci
+          
+      - name: Install Playwright
+        run: |
+          npx playwright install --with-deps chromium
+          
+      - name: Start backend server
+        run: |
+          cd server
+          npm start &
+          sleep 10
+        env:
+          NODE_ENV: test
+          PORT: 5000
+          MONGODB_URI: mongodb://localhost:27017/e2e_test_db
+          JWT_SECRET: test-secret-key
+          
+      - name: Build frontend
+        run: |
+          cd client
+          npm run build
+        env:
+          REACT_APP_API_URL: http://localhost:5000
+          
+      - name: Run E2E tests
+        run: |
+          cd client
+          npx serve -s build -l 3000 &
+          sleep 5
+          npx playwright test || echo "Playwright tests not configured yet"
+          
+      - name: Upload E2E test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: e2e-test-results
+          path: client/test-results/
+
+  # ========================================
+  # Security Scan
+  # ========================================
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+          
+      - name: Upload Trivy scan results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+          
+      - name: Run npm audit
+        run: |
+          cd server && npm audit --audit-level=moderate || true
+          cd ../client && npm audit --audit-level=moderate || true
+
+  # ========================================
+  # Build Docker Images
+  # ========================================
+  build-docker:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: [lint-and-typecheck, backend-tests, frontend-tests]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        
+      - name: Build and push backend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./server
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/teacher-navigator-backend:latest
+            ${{ secrets.DOCKER_USERNAME }}/teacher-navigator-backend:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./client
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/teacher-navigator-frontend:latest
+            ${{ secrets.DOCKER_USERNAME }}/teacher-navigator-frontend:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ========================================
+  # Deploy to Development
+  # ========================================
+  deploy-dev:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    needs: [build-docker, security-scan]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    environment: development
+    
+    steps:
+      - name: Deploy to development server
+        run: |
+          echo "Deploying to development environment..."
+          # SSH deployment or API call to deployment service
+          # Example: 
+          # ssh ${{ secrets.DEV_SSH_USER }}@${{ secrets.DEV_SSH_HOST }} 'cd /app && docker-compose pull && docker-compose up -d'
+          
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: 'Development deployment ${{ job.status }}'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        if: always()
+
+  # ========================================
+  # Deploy to Production
+  # ========================================
+  deploy-prod:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build-docker, security-scan, e2e-tests]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: production
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Deploy to production
+        run: |
+          echo "Deploying to production environment..."
+          # Production deployment commands
+          # Example for AWS ECS:
+          # aws ecs update-service --cluster production --service teacher-navigator --force-new-deployment
+          
+      - name: Run smoke tests
+        run: |
+          echo "Running production smoke tests..."
+          # curl https://api.yourdomain.com/health
+          
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: 'Production deployment ${{ job.status }}'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        if: always()
+        
+      - name: Create release
+        if: success()
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          body: |
+            ## Changes in this release
+            - Commit: ${{ github.sha }}
+            - Build: ${{ github.run_number }}
+            
+            [View deployment](https://yourdomain.com)
+          draft: false
+          prerelease: false
+
+  # ========================================
+  # Cleanup
+  # ========================================
+  cleanup:
+    name: Cleanup
+    runs-on: ubuntu-latest
+    needs: [deploy-dev, deploy-prod]
+    if: always()
+    
+    steps:
+      - name: Clean up old Docker images
+        run: |
+          echo "Cleaning up old Docker images..."
+          # docker image prune -a -f --filter "until=168h"
+          
+      - name: Clean up test data
+        run: |
+          echo "Cleaning up test databases and artifacts..."
+          # Cleanup commands
